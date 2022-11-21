@@ -1,0 +1,35 @@
+{
+	"name": "gulp-through2",
+	"version": "1.0.0",
+	"description": "A simple wrapper for creating gulp plugin instantly.",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "gulp default",
+		"version": "gulp && git add -A"
+	},
+	"keywords": [
+		"gulp",
+		"plugin"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MuTsunTsai/gulp-through2.git"
+	},
+	"author": "Mu-Tsun Tsai",
+	"license": "MIT",
+	"devDependencies": {
+		"gulp": "^4.0.2",
+		"gulp-newer": "^1.4.0",
+		"gulp-typescript": "6.0.0-alpha.1",
+		"typescript": "^4.9.3"
+	},
+	"dependencies": {
+		"@types/vinyl": "^2.0.6",
+		"plugin-error": "^2.0.0",
+		"vinyl": "^2.2.1"
+	},
+	"files": [
+		"dist"
+	]
+}
