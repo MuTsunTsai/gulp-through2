@@ -35,7 +35,7 @@ const gulp = require('gulp');
 const through2 = require('gulp-through2');
 
 // This is like a simplified version of gulp-replace
-const myReplace(search, replacement) => through2(
+const myReplace = (search, replacement) => through2(
 	// In the shorthand syntax, string content of the file
 	// is transformed with the given transformation function.
 	content => content.replace(search, replacement)
@@ -87,12 +87,12 @@ Its value can be a string, a regular expression, a function,
 or an array of the above.
 Each have different ways of filtering:
 
-| Type       | Description |
-| ---------- | ----------- |
+| Type       | Description                                                                                  |
+| ---------- | -------------------------------------------------------------------------------------------- |
 | `String`   | The extension of the file should match exactly to the string (e.g. ".html"). Case-sensitive. |
-| `RegExp`   | The full filename of the file is tested against the regular expression. |
+| `RegExp`   | The full filename of the file is tested against the regular expression.                      |
 | `Function` | The `File` object is passed to the function as the single parameter, and it should return boolean value indicating whether to transform the file. |
-| `Array`    | The file will be transformed if any of the conditions in the array is met. |
+| `Array`    | The file will be transformed if any of the conditions in the array is met.                   |
 
 If this options is not provided, all files will be transformed.
 
@@ -100,20 +100,20 @@ If this options is not provided, all files will be transformed.
 
 This is a function that takes three parameters:
 
-| Parameter                  | Description |
-| -------------------------- | ----------- |
+| Parameter                  | Description                     |
+| -------------------------- | ------------------------------- |
 | `content: string`          | The string content of the file. |
-| `file: File`               | The file object in question. |
-| `encoding: BufferEncoding` | The encoding of the file. |
+| `file: File`               | The file object in question.    |
+| `encoding: BufferEncoding` | The encoding of the file.       |
 
 It should return one of the following (with different effects):
 
-| Type     | Description |
-| -------- | ----------- |
-| `String` | The returned string will be used as the new content of the file. |
-| `File`   | The new file object will be passed on instead. |
-| `null`   | The file is discarded and will not be passed on. |
-| `void`   | The original file object (possibly modified) passes on. |
+| Type     | Description                                            |
+| -------- | ------------------------------------------------------ |
+| `String` | The returned string will be used as the new content of the file.<br>Note: the original file object is kept, so other manipulations on it will be applied. |
+| `File`   | The new file object will be passed on instead.         |
+| `null`   | The file is discarded and will not be passed on.       |
+| `void`   | The original file object (possibly mutated) passes on. |
 
 If this option is not provided, no transformation will be applied to the files.
 
@@ -145,9 +145,9 @@ For complete details of each options,
 refer to [index.d.ts](src/index.d.ts).
 Here is a brief account of each option:
 
-| Option             | Description |
-| ------------------ | ----------- |
+| Option             | Description                                             |
+| ------------------ | ------------------------------------------------------- |
 | `flushEmptyList`   | `boolean` value indicating whether to run `flush()` when the transformed file list is empty. Default value is `false`. |
 | `streamTransform`  | A function for transforming stream contents of a file. If not provided, `gulp-through2` will throw an error when stream contents as passed in, which is the typical behavior in many gulp plugins. |
 | `name`             | The name of your plugin. Used only for printing errors. |
-| `transformOptions` |  Advanced options for creating `stream.Transform`. |
+| `transformOptions` |  Advanced options for creating `stream.Transform`.      |

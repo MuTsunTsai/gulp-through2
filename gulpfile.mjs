@@ -1,8 +1,8 @@
 import gulp from 'gulp';
 import ts from 'gulp-typescript';
 import newer from 'gulp-newer';
-import { fileURLToPath } from 'url';
 
+import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 
 const project = ts.createProject("tsconfig.json");
