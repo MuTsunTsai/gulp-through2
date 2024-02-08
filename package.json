@@ -8,6 +8,9 @@
 		"build": "gulp default",
 		"version": "gulp && git add -A"
 	},
+	"engines": {
+		"node": ">=16.0.0"
+	},
 	"keywords": [
 		"gulp",
 		"plugin"

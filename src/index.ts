@@ -36,11 +36,11 @@ const gulpThrough2 = function(
 
 	const _options: PartialOption = Object.assign({}, defaultOptions, options);
 	const files: File[] = [];
-	const pluginError = (e: unknown) => {
+	const err = (e: unknown) => {
 		let message = "Unknown error occur";
 		if(typeof e === "string") message = e;
 		else if(e instanceof Error) message = e.message;
-		return new PluginError(_options.name, message);
+		throw new PluginError(_options.name, message);
 	}
 
 	function match(file: File, filter: gt2.Filter | gt2.Filter[]): boolean {
@@ -68,15 +68,16 @@ const gulpThrough2 = function(
 				callback(null, file);
 			}
 		}
-		const err = (e: unknown) => callback(pluginError(e));
 
 		// In theory, `chunk` can be anything, so we perform a basic check first
-		if(!File.isVinyl(chunk)) return err("Given chunk is not a vinyl file; this transformation is for Gulp streams only.");
+		if(!File.isVinyl(chunk)) {
+			return err("Given chunk is not a vinyl file; this transformation is for Gulp streams only.");
+		}
 		let file: File = chunk;
 
 		// Check preconditions
 		if(file.isNull()) return callback();
-		if(!_options.streamTransform && file.isStream()) return err("Streaming not supported.");
+		if(!_options.streamTransform && file.isStream()) err("Streaming not supported.");
 		if(_options.filter && !match(file, _options.filter)) return output(file);
 
 		try {
@@ -105,7 +106,7 @@ const gulpThrough2 = function(
 				file.contents = result;
 			}
 		} catch(e: unknown) {
-			return err(e);
+			err(e);
 		}
 
 		output(file);
@@ -124,7 +125,7 @@ const gulpThrough2 = function(
 				// Clear the file list, in case the plugin is re-used
 				files.length = 0;
 			} catch(e: unknown) {
-				return callback(pluginError(e));
+				err(e);
 			}
 		}
 		callback();
