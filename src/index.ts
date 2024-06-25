@@ -101,7 +101,8 @@ const gulpThrough2 = function(
 
 			// Perform stream transformation when applicable
 			else if(file.isStream() && _options.streamTransform) {
-				const result = await _options.streamTransform.call(this, file.contents);
+				const result = await _options.streamTransform.call(this, file.contents, file);
+				if(result === null) return callback();
 				if(!isReadableStream(result)) throw "Transformed result should be a readable stream.";
 				file.contents = result;
 			}

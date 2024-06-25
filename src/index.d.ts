@@ -61,9 +61,11 @@ declare namespace gulpThrough2 {
 		 * To disable this error, simply assign the identity function `stream => stream`.
 		 *
 		 * @param {NodeJS.ReadableStream} stream The stream content of a file.
-		 * @returns {Awaitable<NodeJS.ReadableStream>} The transformed stream, or a {@link Promise} of it.
+		 * @param {File} file The file object itself.
+		 * @returns {Awaitable<NodeJS.ReadableStream | null>} The transformed stream, or a {@link Promise} of it.
+		 * If the result is `null` then the file will be discarded.
 		 */
-		streamTransform: (this: stream.Transform, stream: NodeJS.ReadableStream) => Awaitable<NodeJS.ReadableStream>;
+		streamTransform: (this: stream.Transform, stream: NodeJS.ReadableStream, file: File) => Awaitable<NodeJS.ReadableStream | null>;
 
 		/**
 		 * The name of the gulp plugin. Used only for printing errors.

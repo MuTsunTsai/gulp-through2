@@ -129,7 +129,7 @@ This is a function that takes the transformed file array as parameter,
 and it should return a new array indicating the files to be passed on.
 You can then add, remove or change the order of the files as you like.
 
-If case you still need to manipulate the file contents inside `flush()` function, `gulp-through2` provides two utility methods for reading and writing file contents:
+In case you still need to manipulate the file contents inside `flush()` function, `gulp-through2` provides two utility methods for reading and writing file contents:
 
 ```ts
 function read(file: File, encoding?: BufferEncoding): string;
